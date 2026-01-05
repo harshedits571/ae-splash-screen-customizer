@@ -1,6 +1,6 @@
 
 import React, { useRef } from 'react';
-import { SplashSettings, BackgroundType, Preset, FitMode } from '../types';
+import { SplashSettings, BackgroundType, Preset } from '../types';
 import { PRESETS, DEFAULT_SETTINGS } from '../constants';
 import { 
   Upload, 
@@ -15,10 +15,7 @@ import {
   Minimize2,
   BookOpen,
   ExternalLink,
-  ChevronRight,
-  FolderSearch,
-  FileDigit,
-  Save
+  ChevronRight
 } from 'lucide-react';
 
 interface ControlsProps {
@@ -31,7 +28,6 @@ interface ControlsProps {
 const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, isExporting }) => {
   const artworkRef = useRef<HTMLInputElement>(null);
   const aeLogoRef = useRef<HTMLInputElement>(null);
-  const ccLogoRef = useRef<HTMLInputElement>(null);
   const bgImgRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, field: keyof SplashSettings) => {
@@ -75,11 +71,11 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
         <div className="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-600/20">
           <Box className="w-5 h-5 text-white" />
         </div>
-        <h2 className="text-xl font-bold tracking-tight">Customizer</h2>
+        <h2 className="text-xl font-bold tracking-tight text-white">Customizer</h2>
       </div>
 
       <div className="space-y-8 pb-12">
-        {/* Download Action First for visibility */}
+        {/* Step 1: Export Action */}
         <section className="space-y-4">
            <button
             onClick={onExport}
@@ -95,26 +91,26 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
           </button>
         </section>
 
-        {/* Installation Instructions */}
-        <section className="bg-zinc-950 rounded-xl border border-zinc-800 p-5 space-y-5">
+        {/* Full Installation Guide */}
+        <section className="bg-zinc-950 rounded-xl border border-zinc-800 p-5 space-y-5 shadow-inner">
           <div className="flex items-center gap-2 mb-1">
             <BookOpen className="w-4 h-4 text-indigo-400" />
-            <label className="text-xs font-bold uppercase tracking-wider text-white">Full Installation Guide</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-white">How to Apply (Windows)</label>
           </div>
           
           <div className="space-y-4">
             {/* Step 2: Resource Hacker */}
             <div className="flex gap-3">
-              <span className="flex-shrink-0 w-5 h-5 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] font-bold text-white">2</span>
+              <span className="flex-shrink-0 w-5 h-5 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-indigo-600/20">2</span>
               <div className="space-y-2 flex-1">
                 <p className="text-[11px] text-zinc-300 font-medium">Download & Install Resource Hacker</p>
                 <a 
                   href="https://www.angusj.com/resourcehacker/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-indigo-400 text-[10px] px-2 py-1 rounded transition-colors border border-zinc-700"
+                  className="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-indigo-400 text-[10px] px-2.5 py-1.5 rounded-md transition-all border border-zinc-700 hover:border-indigo-500/50"
                 >
-                  Download Site <ExternalLink className="w-2.5 h-2.5" />
+                  Download Site <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </div>
@@ -123,31 +119,33 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">3</span>
               <div className="space-y-2 flex-1">
-                <p className="text-[11px] text-zinc-300 font-medium">Locate the target DLL</p>
-                <div className="bg-black/40 p-2 rounded border border-white/5 font-mono text-[9px] text-zinc-500 break-all leading-relaxed">
-                  C:\Program Files\Adobe\Adobe After Effects [Version]\Support Files\<span className="text-indigo-300">afterFXLib.dll</span>
+                <p className="text-[11px] text-zinc-300 font-medium">Find the library file</p>
+                <div className="bg-black/50 p-2.5 rounded-lg border border-white/5 font-mono text-[9px] text-zinc-500 break-all leading-relaxed select-all">
+                  C:\Program Files\Adobe\Adobe After Effects [Year]\Support Files\<span className="text-indigo-300 font-bold">afterFXLib.dll</span>
                 </div>
-                <p className="text-[9px] text-amber-500/70 italic">* Back up this file before editing!</p>
+                <p className="text-[9px] text-amber-500/70 italic flex items-center gap-1">
+                   ⚠️ Tip: Copy and Paste the original DLL as a backup first!
+                </p>
               </div>
             </div>
 
             {/* Step 4: Import */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">4</span>
-              <p className="text-[11px] text-zinc-400">Launch Resource Hacker and <span className="text-zinc-200">Drag & Drop</span> the DLL file into the window.</p>
+              <p className="text-[11px] text-zinc-400">Launch Resource Hacker and <span className="text-zinc-100 font-semibold underline decoration-indigo-500/50 underline-offset-2">Drag & Drop</span> the DLL into it.</p>
             </div>
 
             {/* Step 5: Navigate */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">5</span>
               <div className="space-y-1">
-                <p className="text-[11px] text-zinc-400">In the left tree, navigate to:</p>
-                <div className="flex items-center gap-1.5 bg-zinc-900 px-2 py-1.5 rounded border border-zinc-800 font-mono text-[10px]">
+                <p className="text-[11px] text-zinc-400">Expand the folder tree on the left:</p>
+                <div className="flex items-center gap-1.5 bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800 font-mono text-[10px]">
                    <span className="text-zinc-500">PNG</span>
-                   <ChevronRight className="w-2.5 h-2.5 text-zinc-700" />
-                   <span className="text-indigo-300 font-bold">AE_SPLASH</span>
-                   <ChevronRight className="w-2.5 h-2.5 text-zinc-700" />
-                   <span className="text-indigo-300 font-bold">0</span>
+                   <ChevronRight className="w-3 h-3 text-zinc-700" />
+                   <span className="text-indigo-400 font-bold">AE_SPLASH</span>
+                   <ChevronRight className="w-3 h-3 text-zinc-700" />
+                   <span className="text-indigo-400 font-bold">0</span>
                 </div>
               </div>
             </div>
@@ -156,18 +154,20 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">6</span>
               <div className="space-y-1.5">
-                <p className="text-[11px] text-zinc-400">Right-click <code className="text-indigo-300 font-bold">0</code> and select:</p>
-                <div className="bg-zinc-900 p-2 rounded text-[10px] text-zinc-200 border border-zinc-800">
-                  Replace Resource... <ChevronRight className="w-2.5 h-2.5 inline mx-1 opacity-30" /> Open file with new resource...
+                <p className="text-[11px] text-zinc-400">Right-click the <code className="text-indigo-300 font-bold">0</code> icon and select:</p>
+                <div className="bg-zinc-900 p-2.5 rounded-lg text-[10px] text-zinc-100 border border-zinc-800 flex items-center">
+                  <span className="opacity-70">Replace Resource...</span>
+                  <ChevronRight className="w-3 h-3 mx-1 opacity-20" />
+                  <span className="text-indigo-300 font-bold">Open file with new resource...</span>
                 </div>
-                <p className="text-[10px] text-zinc-500 leading-tight">Pick your exported PNG from Step 1.</p>
+                <p className="text-[10px] text-zinc-500 leading-tight">Pick the PNG you downloaded in Step 1.</p>
               </div>
             </div>
 
             {/* Step 7: Save */}
             <div className="flex gap-3">
-              <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">7</span>
-              <p className="text-[11px] text-zinc-400">Click <span className="text-indigo-400 font-bold">File > Save</span>. Restart After Effects to see your new splash!</p>
+              <span className="flex-shrink-0 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-emerald-500/20">7</span>
+              <p className="text-[11px] text-zinc-300">Go to <span className="text-white font-bold">File > Save</span>. Open AE to see your new custom splash!</p>
             </div>
           </div>
         </section>
@@ -204,7 +204,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               value={settings.title}
               onChange={e => setSettings(prev => ({ ...prev, title: e.target.value }))}
               placeholder="App Title (e.g. After Effects)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder:text-zinc-600"
             />
           </div>
           <div>
@@ -213,7 +213,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               value={settings.subtitle}
               onChange={e => setSettings(prev => ({ ...prev, subtitle: e.target.value }))}
               placeholder="Subtitle (e.g. 2025 Release)"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder:text-zinc-600"
             />
           </div>
           <div className="flex gap-4">
@@ -406,7 +406,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
         </section>
 
         <p className="text-[10px] text-center text-zinc-600 leading-relaxed px-4">
-          After saving in Resource Hacker, a <code className="text-zinc-500">_original.dll</code> backup will be created automatically in your Support Files folder.
+          Note: After saving in Resource Hacker, a <code className="text-zinc-500">_original.dll</code> backup will be created automatically in your Support Files folder.
         </p>
       </div>
     </div>
