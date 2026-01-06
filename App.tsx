@@ -1,9 +1,9 @@
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import SplashScreen from './components/SplashScreen';
-import Controls from './components/Controls';
-import { SplashSettings } from './types';
-import { DEFAULT_SETTINGS } from './constants';
+import SplashScreen from './components/SplashScreen.tsx';
+import Controls from './components/Controls.tsx';
+import { SplashSettings } from './types.ts';
+import { DEFAULT_SETTINGS } from './constants.tsx';
 import { Monitor, Info } from 'lucide-react';
 
 declare global {
@@ -87,14 +87,12 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col lg:flex-row h-screen w-screen overflow-hidden">
-      {/* Workspace Area */}
       <div 
         ref={containerRef}
         className="flex-1 relative flex flex-col items-center justify-center p-8 bg-zinc-950 overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Header Branding */}
         <div className="absolute top-8 left-8 flex items-center gap-3">
           <div className="p-2 bg-indigo-500 rounded text-white font-black text-xs">AE</div>
           <div>
@@ -103,13 +101,11 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Info Tip */}
         <div className="absolute top-8 right-8 flex items-center gap-2 bg-zinc-900/50 backdrop-blur border border-zinc-800 rounded-full px-4 py-1.5 animate-pulse">
           <Info className="w-3.5 h-3.5 text-indigo-400" />
           <span className="text-[10px] text-zinc-400 font-medium">Interactivity disabled during export</span>
         </div>
 
-        {/* Preview Container */}
         <div 
           className="relative transition-all duration-500 ease-out"
           style={{ 
@@ -126,7 +122,6 @@ const App: React.FC = () => {
           />
         </div>
 
-        {/* Bottom Specs */}
         <div className="absolute bottom-8 flex items-center gap-8 text-zinc-600">
           <div className="flex items-center gap-2">
             <Monitor className="w-4 h-4" />
@@ -138,7 +133,6 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Control Sidebar */}
       <Controls 
         settings={settings} 
         setSettings={setSettings} 

@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
-import { SplashSettings, BackgroundType, Preset } from '../types';
-import { PRESETS, DEFAULT_SETTINGS } from '../constants';
+import { SplashSettings, BackgroundType, Preset } from '../types.ts';
+import { PRESETS, DEFAULT_SETTINGS } from '../constants.tsx';
 import { 
   Upload, 
   Type, 
@@ -87,87 +87,75 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
             ) : (
               <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
             )}
-            {isExporting ? 'Preparing Image...' : '1. Export Design (700×500)'}
+            {isExporting ? 'Preparing Image...' : '1. Export Design (PNG)'}
           </button>
         </section>
 
-        {/* Full Installation Guide */}
-        <section className="bg-zinc-950 rounded-xl border border-zinc-800 p-5 space-y-5 shadow-inner">
+        {/* Manual Patch Guide */}
+        <section className="bg-zinc-950 rounded-xl border border-zinc-800 p-5 space-y-5">
           <div className="flex items-center gap-2 mb-1">
             <BookOpen className="w-4 h-4 text-indigo-400" />
-            <label className="text-xs font-bold uppercase tracking-wider text-white">How to Apply (Windows)</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-white">Application Steps</label>
           </div>
           
           <div className="space-y-4">
-            {/* Step 2: Resource Hacker */}
+            {/* Step 2 */}
             <div className="flex gap-3">
-              <span className="flex-shrink-0 w-5 h-5 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-indigo-600/20">2</span>
+              <span className="flex-shrink-0 w-5 h-5 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] font-bold text-white">2</span>
               <div className="space-y-2 flex-1">
-                <p className="text-[11px] text-zinc-300 font-medium">Download & Install Resource Hacker</p>
+                <p className="text-[11px] text-zinc-300 font-medium">Download Resource Hacker</p>
                 <a 
                   href="https://www.angusj.com/resourcehacker/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-indigo-400 text-[10px] px-2.5 py-1.5 rounded-md transition-all border border-zinc-700 hover:border-indigo-500/50"
+                  className="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-indigo-400 text-[10px] px-2 py-1 rounded transition-colors border border-zinc-700"
                 >
-                  Download Site <ExternalLink className="w-3 h-3" />
+                  Visit angusj.com <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               </div>
             </div>
 
-            {/* Step 3: File Location */}
+            {/* Step 3 */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">3</span>
-              <div className="space-y-2 flex-1">
-                <p className="text-[11px] text-zinc-300 font-medium">Find the library file</p>
-                <div className="bg-black/50 p-2.5 rounded-lg border border-white/5 font-mono text-[9px] text-zinc-500 break-all leading-relaxed select-all">
-                  C:\Program Files\Adobe\Adobe After Effects [Year]\Support Files\<span className="text-indigo-300 font-bold">afterFXLib.dll</span>
+              <div className="space-y-1.5 flex-1">
+                <p className="text-[11px] text-zinc-300 font-medium">Navigate to Support Files</p>
+                <div className="bg-black/40 p-2 rounded border border-white/5 font-mono text-[9px] text-zinc-500 break-all leading-relaxed">
+                  C:\Program Files\Adobe\Adobe After Effects [Year]\Support Files\<span className="text-indigo-300">afterFXLib.dll</span>
                 </div>
-                <p className="text-[9px] text-amber-500/70 italic flex items-center gap-1">
-                   ⚠️ Tip: Copy and Paste the original DLL as a backup first!
-                </p>
               </div>
             </div>
 
-            {/* Step 4: Import */}
+            {/* Step 4 */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">4</span>
-              <p className="text-[11px] text-zinc-400">Launch Resource Hacker and <span className="text-zinc-100 font-semibold underline decoration-indigo-500/50 underline-offset-2">Drag & Drop</span> the DLL into it.</p>
+              <p className="text-[11px] text-zinc-400 flex-1">Open Resource Hacker and <span className="text-zinc-200">Drag & Drop</span> the DLL into it.</p>
             </div>
 
-            {/* Step 5: Navigate */}
+            {/* Step 5 */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">5</span>
-              <div className="space-y-1">
-                <p className="text-[11px] text-zinc-400">Expand the folder tree on the left:</p>
-                <div className="flex items-center gap-1.5 bg-zinc-900 px-3 py-2 rounded-lg border border-zinc-800 font-mono text-[10px]">
-                   <span className="text-zinc-500">PNG</span>
-                   <ChevronRight className="w-3 h-3 text-zinc-700" />
-                   <span className="text-indigo-400 font-bold">AE_SPLASH</span>
-                   <ChevronRight className="w-3 h-3 text-zinc-700" />
-                   <span className="text-indigo-400 font-bold">0</span>
+              <div className="space-y-1 flex-1">
+                <p className="text-[11px] text-zinc-400">Navigate the folder tree:</p>
+                <div className="flex items-center gap-1 bg-zinc-900 px-2 py-1 rounded border border-zinc-800 font-mono text-[10px]">
+                   <span className="text-zinc-500">PNG</span> <ChevronRight className="w-2.5 h-2.5 text-zinc-700" /> <span className="text-indigo-300">AE_SPLASH</span> <ChevronRight className="w-2.5 h-2.5 text-zinc-700" /> <span className="text-indigo-300">0</span>
                 </div>
               </div>
             </div>
 
-            {/* Step 6: Replace */}
+            {/* Step 6 */}
             <div className="flex gap-3">
               <span className="flex-shrink-0 w-5 h-5 bg-zinc-800 rounded-full flex items-center justify-center text-[10px] font-bold text-zinc-500 border border-zinc-700">6</span>
-              <div className="space-y-1.5">
-                <p className="text-[11px] text-zinc-400">Right-click the <code className="text-indigo-300 font-bold">0</code> icon and select:</p>
-                <div className="bg-zinc-900 p-2.5 rounded-lg text-[10px] text-zinc-100 border border-zinc-800 flex items-center">
-                  <span className="opacity-70">Replace Resource...</span>
-                  <ChevronRight className="w-3 h-3 mx-1 opacity-20" />
-                  <span className="text-indigo-300 font-bold">Open file with new resource...</span>
-                </div>
-                <p className="text-[10px] text-zinc-500 leading-tight">Pick the PNG you downloaded in Step 1.</p>
+              <div className="space-y-1 flex-1">
+                <p className="text-[11px] text-zinc-400">Right-click <code className="text-indigo-300">0</code> &gt; <span className="text-zinc-200">Replace Resource...</span></p>
+                <p className="text-[10px] text-zinc-500 italic">Click "Open file with new resource" and select your PNG.</p>
               </div>
             </div>
 
-            {/* Step 7: Save */}
+            {/* Step 7 */}
             <div className="flex gap-3">
-              <span className="flex-shrink-0 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-emerald-500/20">7</span>
-              <p className="text-[11px] text-zinc-300">Go to <span className="text-white font-bold">File > Save</span>. Open AE to see your new custom splash!</p>
+              <span className="flex-shrink-0 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white">7</span>
+              <p className="text-[11px] text-zinc-300 flex-1">Click <span className="font-bold">File &gt; Save</span>. Launch After Effects to enjoy your custom splash!</p>
             </div>
           </div>
         </section>
@@ -196,14 +184,14 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
         <section className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Type className="w-4 h-4 text-zinc-400" />
-            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500">Main Typography</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500">Typography</label>
           </div>
           <div>
             <input
               type="text"
               value={settings.title}
               onChange={e => setSettings(prev => ({ ...prev, title: e.target.value }))}
-              placeholder="App Title (e.g. After Effects)"
+              placeholder="App Title"
               className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder:text-zinc-600"
             />
           </div>
@@ -212,13 +200,13 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               type="text"
               value={settings.subtitle}
               onChange={e => setSettings(prev => ({ ...prev, subtitle: e.target.value }))}
-              placeholder="Subtitle (e.g. 2025 Release)"
+              placeholder="Subtitle"
               className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder:text-zinc-600"
             />
           </div>
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">Title Color</label>
+              <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">Title</label>
               <input 
                 type="color" 
                 value={settings.titleColor} 
@@ -227,7 +215,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
               />
             </div>
             <div className="flex-1">
-              <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">Sub Color</label>
+              <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">Sub</label>
               <input 
                 type="color" 
                 value={settings.subtitleColor} 
@@ -246,22 +234,19 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
           </div>
           
           <div className="space-y-3">
-             {/* Artwork */}
              <div className="bg-zinc-800 p-3 rounded-lg border border-zinc-700 group transition-colors hover:border-zinc-600">
                <div className="flex justify-between items-center mb-2">
-                 <label className="text-xs font-medium text-zinc-300">Main Artwork (Right)</label>
+                 <label className="text-xs font-medium text-zinc-300">Artwork (Right)</label>
                  <div className="flex gap-1">
                    <button 
                     onClick={() => clearFile('artworkUrl', artworkRef)}
                     className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-red-400 transition-colors"
-                    title="Remove Image"
                    >
                      <Trash2 className="w-3 h-3" />
                    </button>
                    <button 
                     onClick={() => resetFile('artworkUrl', artworkRef)}
                     className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-indigo-400 transition-colors"
-                    title="Reset to default"
                    >
                      <RotateCcw className="w-3 h-3" />
                    </button>
@@ -294,36 +279,6 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
                   </button>
                </div>
              </div>
-
-             {/* App Logo */}
-             <div className="bg-zinc-800 p-3 rounded-lg border border-zinc-700 group transition-colors hover:border-zinc-600">
-               <div className="flex justify-between items-center mb-2">
-                 <label className="text-xs font-medium text-zinc-300">App Logo (Top Left)</label>
-                 <div className="flex gap-1">
-                    <button 
-                      onClick={() => clearFile('aeLogoUrl', aeLogoRef)}
-                      className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-red-400 transition-colors"
-                      title="Remove Logo"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                    </button>
-                    <button 
-                      onClick={() => resetFile('aeLogoUrl', aeLogoRef)}
-                      className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-indigo-400 transition-colors"
-                      title="Reset to default"
-                    >
-                      <RotateCcw className="w-3 h-3" />
-                    </button>
-                 </div>
-               </div>
-               <input 
-                ref={aeLogoRef}
-                type="file" 
-                accept="image/*"
-                onChange={e => handleFileUpload(e, 'aeLogoUrl')}
-                className="text-[10px] text-zinc-500 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-500/10 file:text-indigo-400 hover:file:bg-indigo-500/20 cursor-pointer w-full"
-               />
-             </div>
           </div>
         </section>
 
@@ -331,7 +286,7 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
         <section className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Palette className="w-4 h-4 text-zinc-400" />
-            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500">Canvas Background</label>
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-500">Background</label>
           </div>
           
           <div className="flex bg-zinc-800 p-1 rounded-lg border border-zinc-700">
@@ -358,55 +313,29 @@ const Controls: React.FC<ControlsProps> = ({ settings, setSettings, onExport, is
           )}
 
           {settings.bgType === BackgroundType.GRADIENT && (
-             <div className="space-y-3">
-               <div className="flex gap-4">
-                 <div className="flex-1">
-                   <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">Start Color</label>
-                   <input 
-                    type="color" 
-                    value={settings.gradientStart} 
-                    onChange={e => updateGradient(e.target.value, settings.gradientEnd)}
-                    className="w-full h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
-                   />
-                 </div>
-                 <div className="flex-1">
-                   <label className="text-[10px] text-zinc-500 block mb-1 font-bold uppercase tracking-tighter">End Color</label>
-                   <input 
-                    type="color" 
-                    value={settings.gradientEnd} 
-                    onChange={e => updateGradient(settings.gradientStart, e.target.value)}
-                    className="w-full h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
-                   />
-                 </div>
+             <div className="flex gap-4">
+               <div className="flex-1">
+                 <input 
+                  type="color" 
+                  value={settings.gradientStart} 
+                  onChange={e => updateGradient(e.target.value, settings.gradientEnd)}
+                  className="w-full h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
+                 />
                </div>
-             </div>
-          )}
-
-          {settings.bgType === BackgroundType.IMAGE && (
-             <div className="bg-zinc-800 p-3 rounded-lg border border-zinc-700 transition-colors hover:border-zinc-600">
-                <div className="flex justify-between items-center mb-2">
-                 <label className="text-xs font-medium text-zinc-300">Custom BG Image</label>
-                 <button 
-                  onClick={() => clearFile('backgroundUrl', bgImgRef)}
-                  className="p-1 hover:bg-zinc-700 rounded text-zinc-500 hover:text-red-400 transition-colors"
-                  title="Clear Image"
-                 >
-                   <Trash2 className="w-3 h-3" />
-                 </button>
+               <div className="flex-1">
+                 <input 
+                  type="color" 
+                  value={settings.gradientEnd} 
+                  onChange={e => updateGradient(settings.gradientStart, e.target.value)}
+                  className="w-full h-8 bg-zinc-800 border border-zinc-700 rounded-md p-1 cursor-pointer"
+                 />
                </div>
-                <input 
-                  ref={bgImgRef}
-                  type="file" 
-                  accept="image/*"
-                  onChange={e => handleFileUpload(e, 'backgroundUrl')}
-                  className="text-[10px] text-zinc-500 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-500/10 file:text-indigo-400 hover:file:bg-indigo-500/20 cursor-pointer w-full"
-                />
              </div>
           )}
         </section>
 
         <p className="text-[10px] text-center text-zinc-600 leading-relaxed px-4">
-          Note: After saving in Resource Hacker, a <code className="text-zinc-500">_original.dll</code> backup will be created automatically in your Support Files folder.
+          Changes are rendered live in 700×500. Export your PNG and follow the guide above to update After Effects.
         </p>
       </div>
     </div>

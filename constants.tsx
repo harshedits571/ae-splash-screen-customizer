@@ -1,5 +1,5 @@
 
-import { SplashSettings, BackgroundType } from './types';
+import { SplashSettings, BackgroundType } from './types.ts';
 
 export const DEFAULT_SETTINGS: SplashSettings = {
   aeLogoUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg',

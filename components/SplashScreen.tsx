@@ -1,6 +1,6 @@
 
 import React, { useMemo } from 'react';
-import { SplashSettings, BackgroundType } from '../types';
+import { SplashSettings, BackgroundType } from '../types.ts';
 
 interface SplashScreenProps {
   settings: SplashSettings;
